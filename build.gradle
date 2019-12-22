@@ -21,6 +21,8 @@ repositories {
 
 ext {
 	set('springCloudVersion', "Hoxton.RELEASE")
+	swaggerVersion = '3.0.0-SNAPSHOT'
+	cucumberVersion = '4.8.0'
 }
 
 dependencies {
@@ -29,10 +31,10 @@ dependencies {
 			"org.springframework.boot:spring-boot-starter-webflux",
 			"org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j",
 			"org.springframework.cloud:spring-cloud-starter-sleuth",
-			"io.springfox:springfox-swagger-ui:2.9.2",
-			"io.springfox:springfox-swagger2:3.0.0-SNAPSHOT",
-			"io.springfox:springfox-spring-webflux:3.0.0-SNAPSHOT"
-			//"org.springframework.boot:spring-boot-starter-data-mongodb-reactive"
+			"io.springfox:springfox-swagger-ui:${swaggerVersion}",
+			"io.springfox:springfox-swagger2:${swaggerVersion}",
+			"io.springfox:springfox-spring-webflux:${swaggerVersion}",
+			"org.springframework.boot:spring-boot-starter-data-mongodb-reactive"
 
 	)
 
@@ -43,10 +45,10 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	testImplementation(
-			"io.cucumber:cucumber-java:2.3.1",
+			"io.cucumber:cucumber-java:${cucumberVersion}",
 			"io.projectreactor:reactor-test",
-			"io.cucumber:cucumber-junit:2.3.1",
-			"io.cucumber:cucumber-spring:2.3.1"
+			"io.cucumber:cucumber-junit:${cucumberVersion}",
+			"io.cucumber:cucumber-spring:${cucumberVersion}"
 	)
 }
 

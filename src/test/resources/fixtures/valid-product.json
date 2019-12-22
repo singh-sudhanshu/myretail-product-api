@@ -1,5 +1,87 @@
 {
   "product": {
+    "question_answer_statistics": {
+      "productId": "13860428",
+      "questionCount": 0
+    },
+    "bulk_ship": {
+      "tcins": [
+        {
+          "tcin": "13860428",
+          "handlingItemCharge": {
+            "itemBulky": false
+          }
+        }
+      ]
+    },
+    "rating_and_review_statistics": {
+      "hasErrors": false,
+      "result": {
+        "13860428": {
+          "coreStats": {
+            "AverageOverallRating": 0.0,
+            "RatingReviewTotal": 0,
+            "TotalReviewCount": 0,
+            "RatingsOnlyReviewCount": 0,
+            "RatingDistribution": [
+              {
+                "Count": 0,
+                "RatingValue": 1
+              },
+              {
+                "Count": 0,
+                "RatingValue": 2
+              },
+              {
+                "Count": 0,
+                "RatingValue": 3
+              },
+              {
+                "Count": 0,
+                "RatingValue": 4
+              },
+              {
+                "Count": 0,
+                "RatingValue": 5
+              }
+            ],
+            "RecommendedCount": 0,
+            "NotRecommendedCount": 0,
+            "SecondaryRatingsAveragesOrder": [],
+            "SecondaryRatingsAverages": {},
+            "OverallRatingRange": 5
+          },
+          "photoInfoList": [],
+          "secondaryRatingFields": [],
+          "expertReviewContentMetadata": [
+            {
+              "url": "/expertContent/13860428?vendor=common_sense",
+              "lastUpdated": "2019-09-30T10:17:27.467+0000",
+              "vendor": "COMMON_SENSE",
+              "partNumber": "13860428"
+            }
+          ]
+        }
+      }
+    },
+    "rating_and_review_reviews": {
+      "hasErrors": false,
+      "offset": 0,
+      "totalResults": 0,
+      "limit": 10,
+      "duration": 11
+    },
+    "promotion": {
+      "subscriptionShippingMessage": "free shipping",
+      "callout": {
+        "text": "",
+        "type": {
+          "appliedTo": "",
+          "description": ""
+        }
+      },
+      "promotionList": []
+    },
     "deep_red_labels": {
       "total_count": 2,
       "labels": [
@@ -22,10 +104,10 @@
     "available_to_promise_network": {
       "product_id": "13860428",
       "id_type": "TCIN",
-      "available_to_promise_quantity": 136.0,
+      "available_to_promise_quantity": 133.0,
       "street_date": "2011-11-15T06:00:00.000Z",
       "availability": "AVAILABLE",
-      "online_available_to_promise_quantity": 136.0,
+      "online_available_to_promise_quantity": 133.0,
       "stores_available_to_promise_quantity": 0.0,
       "availability_status": "IN_STOCK",
       "multichannel_options": [],
@@ -35,6 +117,33 @@
       "is_loyalty_purchase_enabled": false,
       "is_out_of_stock_in_all_store_locations": false,
       "is_out_of_stock_in_all_online_locations": false
+    },
+    "price": {
+      "partNumber": "13860428",
+      "listPrice": {
+        "null": false,
+        "price": 12.49,
+        "formattedPrice": "$12.49",
+        "priceType": "Reg",
+        "maxPrice": 0,
+        "minPrice": 0
+      },
+      "offerPrice": {
+        "null": false,
+        "startDate": 1576742400000,
+        "price": 12.49,
+        "eyebrow": "",
+        "formattedPrice": "$12.49",
+        "saveDollar": 0.0,
+        "priceType": "Reg",
+        "endDate": 253402214400000,
+        "maxPrice": 0,
+        "savePercent": 0,
+        "minPrice": 0
+      },
+      "ppu": "",
+      "mapPriceFlag": "N",
+      "channelAvailability": "0"
     },
     "item": {
       "tcin": "13860428",
@@ -166,7 +275,7 @@
         "policyDays": "30",
         "guestMessage": "This item must be returned within 30 days of the ship date. See return policy for details."
       },
-      "gifting_enabled": false,
+      "gifting_enabled": true,
       "packaging": {
         "is_retail_ticketed": false
       }
