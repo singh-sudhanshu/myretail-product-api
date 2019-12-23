@@ -57,7 +57,7 @@ class RedSkyConnectorTest {
                 .build());
 
         when(webClient.get()).thenReturn(requestHeadersUriSpecMock);
-        when(uriSpecMock.uri("/api/v1/products/{id}", 123456L)).thenReturn(requestHeaderSpecMock);
+        when(uriSpecMock.uri("/api/v1/products/", 123456L)).thenReturn(requestHeaderSpecMock);
         when(requestHeaderSpecMock.retrieve()).thenReturn(responseSpecMock);
         when(responseMock.bodyToMono(RedSkyResponse.class)).thenReturn(response);
 

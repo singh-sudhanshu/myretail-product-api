@@ -1,5 +1,6 @@
 package com.myretail.product.service;
 
+import com.myretail.product.adaptor.MongoAdaptor;
 import com.myretail.product.adaptor.RedSkyAdaptor;
 import com.myretail.product.model.Price;
 import com.myretail.product.model.ReturnDetails;
@@ -25,11 +26,13 @@ class ProductServiceTest {
     @Mock
     private RedSkyAdaptor redSkyAdaptor;
 
+    @Mock
+    private MongoAdaptor mongoAdaptor;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        productService = new ProductService(redSkyAdaptor);
-
+        productService = new ProductService(redSkyAdaptor, mongoAdaptor);
     }
 
     @Test
@@ -45,13 +48,12 @@ class ProductServiceTest {
                         .build())
                 .build());
 
+        Price price = Price.builder().value(34.34).currencyCode("USD").build();
+
         Mono<ProductResponse> expectedResponse = Mono.just(ProductResponse.builder()
                 .id(Long.valueOf(13860428))
                 .name(product.block().getProductItem().getItem().getProductDescription().getTitle())
-                .currentPrice(Price.builder()
-                        .value(34.34)
-                        .currencyCode("USD")
-                        .build())
+                .currentPrice(price)
                 .returnDetails(ReturnDetails.builder()
                         .code(200)
                         .source("retail-product-api")
@@ -61,10 +63,13 @@ class ProductServiceTest {
 
 
         when(redSkyAdaptor.getProduct(anyLong())).thenReturn(product);
+        when(mongoAdaptor.productPrice(anyLong())).thenReturn(Mono.just(price));
 
         Mono<ProductResponse> actualResponse = productService.service(123456L);
 
         assertEquals(expectedResponse.block().getName(), actualResponse.block().getName());
+        assertEquals(expectedResponse.block().getCurrentPrice(), actualResponse.block().getCurrentPrice());
         verify(redSkyAdaptor, times(1)).getProduct(anyLong());
+        verify(mongoAdaptor, times(1)).productPrice(anyLong());
     }
 }
