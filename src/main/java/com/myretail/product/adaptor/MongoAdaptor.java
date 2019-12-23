@@ -23,5 +23,14 @@ public class MongoAdaptor {
                 .value(p.getCurrentPrice().getValue())
                 .currencyCode(p.getCurrentPrice().getCurrencyCode())
                 .build());
+        //return Mono.just(Price.builder().value(12.12).currencyCode("USD").build());
+    }
+
+    public Mono<Product> updatePrice(Price price, Long id) {
+        Product product = Product.builder()
+                .id(id)
+                .currentPrice(price)
+                .build();
+        return mongoConnector.insert(product);
     }
 }

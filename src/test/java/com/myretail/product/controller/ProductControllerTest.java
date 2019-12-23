@@ -1,10 +1,9 @@
 package com.myretail.product.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myretail.product.model.Price;
 import com.myretail.product.model.ReturnDetails;
 import com.myretail.product.model.response.ProductResponse;
+import com.myretail.product.model.response.ProductUpdateResponse;
 import com.myretail.product.service.ProductService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @WebFluxTest(controllers = ProductController.class)
@@ -27,7 +26,6 @@ class ProductControllerTest {
 
     @Autowired
     private WebTestClient client;
-    private ObjectMapper mapper = new ObjectMapper();
 
     @MockBean
     private ProductService productService;
@@ -66,7 +64,7 @@ class ProductControllerTest {
     }
 
     @Test
-    public void api_response_test() throws JsonProcessingException {
+    public void api_get_response_test() {
 
         ProductResponse product = ProductResponse.builder()
                 .id(13860428L)
@@ -93,11 +91,48 @@ class ProductControllerTest {
                 .expectBody()
                 .jsonPath("$.id").isEqualTo(product.getId())
                 .jsonPath("$.name").isEqualTo(product.getName())
-               // .jsonPath("$.current_price").isEqualTo(product.getCurrentPrice())
+                // .jsonPath("$.current_price").isEqualTo(product.getCurrentPrice())
                 .jsonPath("$.returnDetails.code").isEqualTo(product.getReturnDetails().getCode())
                 .jsonPath("$.returnDetails.message").isEqualTo(product.getReturnDetails().getMessage())
                 .jsonPath("$.returnDetails.source").isEqualTo(product.getReturnDetails().getSource());
 
         Mockito.verify(productService, Mockito.times(1)).service(anyLong());
+    }
+
+    @Test
+    public void api_put_test() {
+
+        Price price = Price.builder()
+                .value(59.99)
+                .currencyCode("USD")
+                .build();
+
+        ProductUpdateResponse response = ProductUpdateResponse.builder()
+                .id(13860428L)
+                .returnDetails(ReturnDetails.builder()
+                        .code(200)
+                        .source("mocked api")
+                        .message("mocked success")
+                        .build())
+                .build();
+
+        when(productService.updatePrice(price, 123456L)).thenReturn(Mono.just(response));
+
+        client
+                .put()
+                .uri("http://localhost:8080/api/v1/products/" + Long.valueOf(13860428))
+                .accept(MediaType.APPLICATION_JSON)
+                .bodyValue(price)
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectHeader()
+                .contentType(MediaType.APPLICATION_JSON)
+                .expectBody()
+                .consumeWith(res -> {
+                    Assertions.assertThat(res.getResponseBody()).isNotNull();
+                    Assertions.assertThat(res.getResponseBody()).isNotEmpty();
+                });
+
+        verify(productService, times(1)).updatePrice(price, 13860428L);
     }
 }
