@@ -28,7 +28,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("My Retail Product Api")
-                .description("Rest Api to retrieve product and it's price")
+                .description("Rest Api to retrieve product and it's current price")
                 .version("1.0.0")
                 .build();
     }

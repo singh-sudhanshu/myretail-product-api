@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: myretail-product-api
+
+redsky:
+  uri: https://redsky.target.com
+
