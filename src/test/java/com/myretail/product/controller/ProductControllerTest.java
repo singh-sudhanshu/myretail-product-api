@@ -5,6 +5,7 @@ import com.myretail.product.model.ReturnDetails;
 import com.myretail.product.model.response.ProductResponse;
 import com.myretail.product.model.response.ProductUpdateResponse;
 import com.myretail.product.service.ProductService;
+import com.myretail.product.util.Validator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +31,9 @@ class ProductControllerTest {
     @MockBean
     private ProductService productService;
 
+    @MockBean
+    private Validator validator;
+
     @Test
     void getProduct_test() {
 
@@ -47,6 +51,7 @@ class ProductControllerTest {
                         .build())
                 .build();
         when(productService.service(13860428L)).thenReturn(Mono.just(product));
+        doNothing().when(validator).validate(any(), anyLong());
 
         client.get()
                 .uri("http://localhost:8080/api/v1/products/" + 13860428L)
@@ -116,7 +121,7 @@ class ProductControllerTest {
                         .build())
                 .build();
 
-        when(productService.updatePrice(price, 123456L)).thenReturn(Mono.just(response));
+        when(productService.updatePrice(any(), anyLong())).thenReturn(Mono.just(response));
 
         client
                 .put()
@@ -133,6 +138,6 @@ class ProductControllerTest {
                     Assertions.assertThat(res.getResponseBody()).isNotEmpty();
                 });
 
-        verify(productService, times(1)).updatePrice(price, 13860428L);
+        verify(productService, times(1)).updatePrice(any(), anyLong());
     }
 }

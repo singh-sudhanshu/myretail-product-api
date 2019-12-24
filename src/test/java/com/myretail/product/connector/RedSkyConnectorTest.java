@@ -5,7 +5,6 @@ import com.myretail.product.model.redsky.ProductDescription;
 import com.myretail.product.model.redsky.ProductItem;
 import com.myretail.product.model.redsky.RedSkyResponse;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -43,7 +42,7 @@ class RedSkyConnectorTest {
         redSkyConnector = new RedSkyConnector(webClient);
     }
 
-    @Test
+
     void getProductById() {
 
         Mono<RedSkyResponse> response = Mono.just(RedSkyResponse.builder()

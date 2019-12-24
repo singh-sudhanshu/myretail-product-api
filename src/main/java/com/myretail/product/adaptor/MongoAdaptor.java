@@ -19,11 +19,12 @@ public class MongoAdaptor {
 
         Mono<Product> product = mongoConnector.findById(id);
 
+        // Check if Mono is empty
+
         return product.map(p -> Price.builder()
                 .value(p.getCurrentPrice().getValue())
                 .currencyCode(p.getCurrentPrice().getCurrencyCode())
                 .build());
-        //return Mono.just(Price.builder().value(12.12).currencyCode("USD").build());
     }
 
     public Mono<Product> updatePrice(Price price, Long id) {
@@ -31,6 +32,6 @@ public class MongoAdaptor {
                 .id(id)
                 .currentPrice(price)
                 .build();
-        return mongoConnector.insert(product);
+        return mongoConnector.save(product);
     }
 }

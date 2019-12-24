@@ -1,9 +1,10 @@
 package com.myretail.product.controller;
 
-import com.myretail.product.model.Price;
+import com.myretail.product.model.request.ProductRequest;
 import com.myretail.product.model.response.ProductResponse;
 import com.myretail.product.model.response.ProductUpdateResponse;
 import com.myretail.product.service.ProductService;
+import com.myretail.product.util.Validator;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -15,9 +16,11 @@ import reactor.core.publisher.Mono;
 public class ProductController {
 
     private final ProductService productService;
+    private final Validator validator;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, Validator validator) {
         this.productService = productService;
+        this.validator = validator;
     }
 
     @ApiOperation(
@@ -41,9 +44,9 @@ public class ProductController {
 
     @ApiOperation(
             value = "Update Product's current price",
-            notes = "This service will accept a Product Id in request param.\n\n" +
-                    "It will call RedSky Rest service to retrieve the product information based on product Id.\n\n" +
-                    "Then it will retrieve the product's current price from No-SQL database and send back aggregated product response"
+            notes = "The service will accept price in request body and product id in path.\n\n" +
+                    "Then it will update current price in data store\n\n" +
+                    "Service sends success response to user"
     )
 
     @ApiResponses({
@@ -54,8 +57,8 @@ public class ProductController {
 
     })
     @PutMapping(value = "/products/{id}")
-    public Mono<ProductUpdateResponse> updatePrice(@RequestBody Price price, @PathVariable Long id) {
-        // Validate request first
-        return productService.updatePrice(price, id);
+    public Mono<ProductUpdateResponse> updatePrice(@RequestBody ProductRequest request, @PathVariable Long id) {
+        validator.validate(request, id);
+        return productService.updatePrice(request.getCurrentPrice(), id);
     }
 }
