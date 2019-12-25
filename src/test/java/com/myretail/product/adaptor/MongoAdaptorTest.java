@@ -45,4 +45,27 @@ class MongoAdaptorTest {
         assertEquals(product.getCurrentPrice().getCurrencyCode(), price.block().getCurrencyCode());
         verify(mongoConnector, times(1)).findById(123456L);
     }
+
+    @Test
+    public void update_price_test() {
+        Product product = Product.builder()
+                .id(123456L)
+                .currentPrice(Price.builder()
+                        .value(12.32)
+                        .currencyCode("USD")
+                        .build())
+                .build();
+
+        Price price = Price.builder()
+                .value(12.32)
+                .currencyCode("USD")
+                .build();
+
+        when(mongoConnector.save(product)).thenReturn(Mono.just(product));
+
+        Mono<Product> actualResponse = mongoAdaptor.updatePrice(price, 123456L);
+
+        verify(mongoConnector, times(1)).save(any());
+
+    }
 }

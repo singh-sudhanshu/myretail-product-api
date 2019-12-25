@@ -64,4 +64,43 @@ dependencyManagement {
 
 test {
 	useJUnitPlatform()
-}
+
+	testLogging {
+		exceptionFormat 'full'
+		events "PASSED", "STARTED", "FAILED", "SKIPPED"
+	}
+
+	afterTest { desc, result ->
+		logger.quiet "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+	}
+
+	afterSuite {
+		desc, result ->
+
+			String RESET = "\u001B[0m"
+			String GREEN = "\u001B[32m"
+			String RED = "\u001B[31m"
+			String WHITE = "\u001B[37m"
+			String BLUE = "\u001B[34m"
+			String YELLOW = "\u001B[33m"
+
+			def resultTypeStyle = WHITE
+
+			switch(result.resultType) {
+				case TestResult.ResultType.SUCCESS:
+					resultTypeStyle = GREEN
+					break
+				case TestResult.ResultType.FAILURE:
+					resultTypeStyle = RED
+					break
+			}
+
+			def currentResult = "\n" + BLUE + "${project.name.toUpperCase()}" + RESET +
+					"Results: " + resultTypeStyle + "${result.resultType}" + RESET + " (${result.testCount} tests, " +
+					GREEN + "${result.successfulTestCount} success, " + RESET +
+					RED + "${result.failedTestCount} failures, " + RESET +
+					YELLOW + "${result.skippedTestCount} skipped)" + RESET
+
+			println currentResult
+	}
+ }
