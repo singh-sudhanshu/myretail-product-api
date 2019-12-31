@@ -9,21 +9,21 @@ MyRetail RESTful service provides the client application ability to:
 Get Product Information:
 -----------------------
 
-###Input: 
+### Input: 
 The client application does a GET request at the path "/products/{id}" for a product 
 
-###Internal Working: 
+### Internal Working: 
 When the API receives the request, it sends a request to "redsky.target.com" and retrieves the 
 product information. This product information doesn't contain price that is needed by the user. The price is retrieved
 from a data store. The price information is now combined with the required product information to provide only the 
 required product information to the user.
 
-###Output: 
+### Output: 
 For a product with product id '13860428', the sample JSON output is as shown below
 
 {"id":13860428,"name":"The Big Lebowski (Blu-ray) (Widescreen)","current_price":{"value": 19.28,"currency_code":"USD"}}
 
-###Errors/Validations: 
+### Errors/Validations: 
 Appropriate error messages are provided after validating the data. The client application can use the message in the response to display the same to the user appropriately.
 
 
