@@ -30,21 +30,21 @@ Appropriate error messages are provided after validating the data. The client ap
 Update Product Price in the datastore:
 -------------------------------------
 
-###Input: 
+### Input: 
 The user/client application can do a PUT request with input similar to the response received in GET and should be able
 to modify the price in the datastore. The request is done at the same path "/products/{id}"
 
-####Sample Input: 
+### Sample Input: 
 JSON Body - {"id":13860428,"name":"The Big Lebowski (Blu-ray) (Widescreen)","current_price":{"value": 15.67,"currency_code":"USD"}}
 
-###Internal Working: 
+### Internal Working: 
 When the API receives PUT request, it does request validations to see if the product is available. If it is, 
 it updates the price for the product is modified in the data store.
 
-###Output: 
+### Output: 
 Success message is returned if the price modification is done.
 
-###Errors/Validations: 
+### Errors/Validations: 
 Appropriate error messages are provided after validating the data. More information is available in 
 the below sections. The client application can use the message in the response to display the same to the user appropriately.
 
@@ -88,17 +88,17 @@ More information about the API methods and the responses is provided below.
 
 API Requests and Responses
 --------------------------
-## PUT Request:
+### PUT Request:
 
 Following PUT request will store information of productID:13860428 in NOSQL database
 
-###Request:
+### Request:
 
 `curl -X PUT "http://localhost:8080/api/v1/products/13860429" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"current_price\": { \"currency_code\": \"USD\", \"value\": 75.23 }, \"id\": 13860429}" \ 
   ' 
  'http://localhost:8080/products/13860428'`
   
-###Response Body:
+### Response Body:
 
 >{
   "id": 13860429,
@@ -148,12 +148,10 @@ Following PUT request will store information of productID:13860428 in NOSQL data
         "source": "retail-product-api"
  }
  
- ##Swagger 
- Screenshots for the RESTful API:
+ ## Swagger screenshots for the RESTful API:
  ---------------------------------------
 
- ## Default
- GET Request Information in Swagger UI
+ ## GET Request Information in Swagger UI
  ---------------------------------
  ![Alt text](/Default_GetProductInfo.png?raw=true "Default GET Information")
 
@@ -161,7 +159,7 @@ Following PUT request will store information of productID:13860428 in NOSQL data
  --------------------------------------------
  ![Alt text](/Sample_GET_Success.png?raw=true "Sample GET Response")
 
- Default PUT Request Information in Swagger UI
+ PUT Request Information in Swagger UI
  ---------------------------------------------
  ![Alt text](/Default_PutRequest.png?raw=true "Default POST Information")
 
