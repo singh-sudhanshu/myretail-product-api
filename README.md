@@ -174,3 +174,7 @@ Following PUT request will store information of productID:13860428 in NOSQL data
  Response for In-Valid PUT Request
  ---------------------------------
  ![Alt text](/src/test/resources/executions/invalid_put_response.png?raw=true "In-Valid PUT Request")
+ 
+  JUnit Tests result
+  ---------------------------------
+  ![Alt text](/src/test/resources/executions/JUnit_test_results.png?raw=true "JUnit Tests")
