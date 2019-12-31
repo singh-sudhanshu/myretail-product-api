@@ -148,10 +148,10 @@ Following PUT request will store information of productID:13860428 in NOSQL data
         "source": "retail-product-api"
  }
  
- ## Swagger screenshots for the RESTful API:
+ ### Swagger screenshots for the RESTful API:
  ---------------------------------------
 
- ## GET Request Information in Swagger UI
+ ### GET Request Information in Swagger UI
  ---------------------------------
  ![Alt text](/Default_GetProductInfo.png?raw=true "Default GET Information")
 
