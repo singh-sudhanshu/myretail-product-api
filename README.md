@@ -6,7 +6,7 @@ MyRetail RESTful service provides the client application ability to:
 
     2. Send request to modify the price information in the database
 
-##Get Product Information:
+Get Product Information:
 -----------------------
 
 ###Input: 
@@ -27,7 +27,7 @@ For a product with product id '13860428', the sample JSON output is as shown bel
 Appropriate error messages are provided after validating the data. The client application can use the message in the response to display the same to the user appropriately.
 
 
-##Update Product Price in the datastore:
+Update Product Price in the datastore:
 -------------------------------------
 
 ###Input: 
@@ -48,7 +48,7 @@ Success message is returned if the price modification is done.
 Appropriate error messages are provided after validating the data. More information is available in 
 the below sections. The client application can use the message in the response to display the same to the user appropriately.
 
-##Technologies Used
+Technologies Used
 -----------------
 
 1. Spring Boot - https://projects.spring.io/spring-boot/
@@ -56,7 +56,7 @@ the below sections. The client application can use the message in the response t
 3. Swagger - http://swagger.io/
 4. Gradle - https://gradle.org
 
-##Instructions to Setup
+Instructions to Setup
 ---------------------
 1. Clone the code from git repository - https://github.com/sudhsi/myretail-product-api
 2. Go to myretail-product directory
@@ -66,13 +66,13 @@ the below sections. The client application can use the message in the response t
 `http://localhost:8080/swagger-ui.html`
 5. Swagger documentation explains the expected request and response for GET and PUT requests.
 
-##Testing
+Testing
 -------
 Application has been developed using TDD/BDD approach.
 For unit test JUnit has been used and for integration test cucumber for java is used.
 The test cases can be executed by running the command './gradlew test'
 
-##Swagger UI:
+Swagger UI:
 ----------
 Swagger displays the following information for an API method by default.
 
@@ -86,7 +86,7 @@ The user can modify the values in the fields provided and can do "Try it out!" a
 
 More information about the API methods and the responses is provided below.
 
-##API Requests and Responses
+API Requests and Responses
 --------------------------
 ## PUT Request:
 
@@ -148,21 +148,23 @@ Following PUT request will store information of productID:13860428 in NOSQL data
         "source": "retail-product-api"
  }
  
- ##Swagger Screenshots for the RESTful API:
+ ##Swagger 
+ Screenshots for the RESTful API:
  ---------------------------------------
 
- ###Default GET Request Information in Swagger UI
+ ## Default
+ GET Request Information in Swagger UI
  ---------------------------------
  ![Alt text](/Default_GetProductInfo.png?raw=true "Default GET Information")
 
- ###Sample GET Response  in Swagger UI
+ Sample GET Response  in Swagger UI
  --------------------------------------------
  ![Alt text](/Sample_GET_Success.png?raw=true "Sample GET Response")
 
- ###Default PUT Request Information in Swagger UI
+ Default PUT Request Information in Swagger UI
  ---------------------------------------------
  ![Alt text](/Default_PutRequest.png?raw=true "Default POST Information")
 
- ###Sample PUT Response in Swagger UI
+ Sample PUT Response in Swagger UI
  ---------------------------------
  ![Alt text](/Sample_PUT_Success.png?raw=true "Sample POST Response")

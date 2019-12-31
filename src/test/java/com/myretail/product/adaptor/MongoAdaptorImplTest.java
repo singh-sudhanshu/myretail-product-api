@@ -10,12 +10,13 @@ import org.mockito.MockitoAnnotations;
 import reactor.core.publisher.Mono;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
-class MongoAdaptorTest {
+class MongoAdaptorImplTest {
 
-    private MongoAdaptor mongoAdaptor;
+    private MongoAdaptorImpl mongoAdaptorImpl;
 
     @Mock
     private MongoConnector mongoConnector;
@@ -23,7 +24,7 @@ class MongoAdaptorTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        mongoAdaptor = new MongoAdaptor(mongoConnector);
+        mongoAdaptorImpl = new MongoAdaptorImpl(mongoConnector);
     }
 
     @Test
@@ -39,7 +40,7 @@ class MongoAdaptorTest {
 
         when(mongoConnector.findById(anyLong())).thenReturn(Mono.just(product));
 
-        Mono<Price> price = mongoAdaptor.productPrice(123456L);
+        Mono<Price> price = mongoAdaptorImpl.productPrice(123456L);
 
         assertEquals(product.getCurrentPrice().getValue(), price.block().getValue());
         assertEquals(product.getCurrentPrice().getCurrencyCode(), price.block().getCurrencyCode());
@@ -56,16 +57,13 @@ class MongoAdaptorTest {
                         .build())
                 .build();
 
-        Price price = Price.builder()
-                .value(12.32)
-                .currencyCode("USD")
-                .build();
-
         when(mongoConnector.save(product)).thenReturn(Mono.just(product));
+        when(mongoConnector.findById(product.getId())).thenReturn(Mono.just(product));
 
-        Mono<Product> actualResponse = mongoAdaptor.updatePrice(price, 123456L);
+        Mono<Product> actualResponse = mongoAdaptorImpl.updatePrice(product, 123456L);
+        assertTrue(actualResponse.block().getCurrentPrice() != null);
 
-        verify(mongoConnector, times(1)).save(any());
-
+        verify(mongoConnector, times(1)).findById(product.getId());
+        verify(mongoConnector, times(1)).save(product);
     }
 }

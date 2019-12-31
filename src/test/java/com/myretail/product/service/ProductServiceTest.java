@@ -1,6 +1,6 @@
 package com.myretail.product.service;
 
-import com.myretail.product.adaptor.MongoAdaptor;
+import com.myretail.product.adaptor.MongoAdaptorImpl;
 import com.myretail.product.adaptor.RedSkyAdaptor;
 import com.myretail.product.model.Price;
 import com.myretail.product.model.Product;
@@ -29,12 +29,12 @@ class ProductServiceTest {
     private RedSkyAdaptor redSkyAdaptor;
 
     @Mock
-    private MongoAdaptor mongoAdaptor;
+    private MongoAdaptorImpl mongoAdaptorImpl;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        productService = new ProductService(redSkyAdaptor, mongoAdaptor);
+        productService = new ProductService(redSkyAdaptor, mongoAdaptorImpl);
     }
 
     @Test
@@ -65,14 +65,14 @@ class ProductServiceTest {
 
 
         when(redSkyAdaptor.getProduct(anyLong())).thenReturn(product);
-        when(mongoAdaptor.productPrice(anyLong())).thenReturn(Mono.just(price));
+        when(mongoAdaptorImpl.productPrice(anyLong())).thenReturn(Mono.just(price));
 
         Mono<ProductResponse> actualResponse = productService.service(123456L);
 
         assertEquals(expectedResponse.block().getName(), actualResponse.block().getName());
         assertEquals(expectedResponse.block().getCurrentPrice(), actualResponse.block().getCurrentPrice());
         verify(redSkyAdaptor, times(1)).getProduct(anyLong());
-        verify(mongoAdaptor, times(1)).productPrice(anyLong());
+        verify(mongoAdaptorImpl, times(1)).productPrice(anyLong());
     }
 
     @Test
@@ -89,7 +89,7 @@ class ProductServiceTest {
                         .build())
                 .build());
 
-        when(mongoAdaptor.updatePrice(any(), anyLong())).thenReturn(Mono.just(Product.builder()
+        when(mongoAdaptorImpl.updatePrice(any(), anyLong())).thenReturn(Mono.just(Product.builder()
                 .id(123456L)
                 .currentPrice(price)
                 .build()));
@@ -97,6 +97,6 @@ class ProductServiceTest {
         Mono<ProductUpdateResponse> actualResponse = productService.updatePrice(price, 123456L);
 
         assertEquals(expectedResponse.block().getReturnDetails().getCode(), actualResponse.block().getReturnDetails().getCode());
-        verify(mongoAdaptor, times(1)).updatePrice(any(), anyLong());
+        verify(mongoAdaptorImpl, times(1)).updatePrice(any(), anyLong());
     }
 }
