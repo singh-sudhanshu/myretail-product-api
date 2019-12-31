@@ -1,4 +1,4 @@
-#MyRetail REST API
+# MyRetail REST API
 
 MyRetail RESTful service provides the client application ability to:
 
