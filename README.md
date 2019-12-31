@@ -153,7 +153,7 @@ Following PUT request will store information of productID:13860428 in NOSQL data
 
  ### GET Request Information in Swagger UI
  ---------------------------------
- ![Alt text](/Default_GetProductInfo.png?raw=true "Default GET Information")
+ ![Alt text](/src/test/resources/executions/swagger_home.png?raw=true "Swagger Home")
 
  Sample GET Response  in Swagger UI
  --------------------------------------------
