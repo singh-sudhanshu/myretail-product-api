@@ -3,7 +3,7 @@ spring:
     name: retail-product-api
   data:
     mongodb:
-      uri: mongodb+srv://mongo_user:Target2250@clustermumbai-9xicj.mongodb.net/Product?retryWrites=true&w=majority
+      uri: mongodb+srv://mongo_user:Target2250@clustermumbai-9xicj.mongodb.net/Product?retryWrites=true&w=majority&mechanism=SCRAM-SHA-1
 
 redsky:
   uri: https://redsky.target.com

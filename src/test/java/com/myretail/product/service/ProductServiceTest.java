@@ -3,12 +3,14 @@ package com.myretail.product.service;
 import com.myretail.product.adaptor.MongoAdaptor;
 import com.myretail.product.adaptor.RedSkyAdaptor;
 import com.myretail.product.model.Price;
+import com.myretail.product.model.Product;
 import com.myretail.product.model.ReturnDetails;
 import com.myretail.product.model.redsky.Item;
 import com.myretail.product.model.redsky.ProductDescription;
 import com.myretail.product.model.redsky.ProductItem;
 import com.myretail.product.model.redsky.RedSkyResponse;
 import com.myretail.product.model.response.ProductResponse;
+import com.myretail.product.model.response.ProductUpdateResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -71,5 +73,30 @@ class ProductServiceTest {
         assertEquals(expectedResponse.block().getCurrentPrice(), actualResponse.block().getCurrentPrice());
         verify(redSkyAdaptor, times(1)).getProduct(anyLong());
         verify(mongoAdaptor, times(1)).productPrice(anyLong());
+    }
+
+    @Test
+    public void update_price_test() {
+
+        Price price = Price.builder().value(34.34).currencyCode("USD").build();
+
+        Mono<ProductUpdateResponse> expectedResponse = Mono.just(ProductUpdateResponse.builder()
+                .id(123456L)
+                .returnDetails(ReturnDetails.builder()
+                        .code(200)
+                        .source("retail-product-api")
+                        .message("Success")
+                        .build())
+                .build());
+
+        when(mongoAdaptor.updatePrice(any(), anyLong())).thenReturn(Mono.just(Product.builder()
+                .id(123456L)
+                .currentPrice(price)
+                .build()));
+
+        Mono<ProductUpdateResponse> actualResponse = productService.updatePrice(price, 123456L);
+
+        assertEquals(expectedResponse.block().getReturnDetails().getCode(), actualResponse.block().getReturnDetails().getCode());
+        verify(mongoAdaptor, times(1)).updatePrice(any(), anyLong());
     }
 }

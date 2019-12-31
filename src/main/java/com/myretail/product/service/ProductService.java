@@ -26,7 +26,7 @@ public class ProductService {
     public Mono<ProductResponse> service(Long id) {
 
         Mono<RedSkyResponse> product = redSkyAdaptor.getProduct(id);
-        Mono<Price> price = mongoAdaptor.productPrice(id);
+        Mono<Price> price = mongoAdaptor.productPrice(id).defaultIfEmpty(Price.builder().value(null).currencyCode("").build());
 
         Mono<Tuple2<RedSkyResponse, Price>> zip = product.zipWith(price);
 

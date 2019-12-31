@@ -32,6 +32,12 @@ public class RestControllerAdvise {
         return getErrorResponse(ex, 400, ex.getMessage());
     }
 
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ProductResponse runtimeException(RuntimeException ex) {
+        return getErrorResponse(ex, 400, "");
+    }
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ProductResponse exception(Exception ex) {

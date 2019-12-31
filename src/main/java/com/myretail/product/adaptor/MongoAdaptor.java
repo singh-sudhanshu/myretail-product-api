@@ -19,8 +19,6 @@ public class MongoAdaptor {
 
         Mono<Product> product = mongoConnector.findById(id);
 
-        // Check if Mono is empty
-
         return product.map(p -> Price.builder()
                 .value(p.getCurrentPrice().getValue())
                 .currencyCode(p.getCurrentPrice().getCurrencyCode())
