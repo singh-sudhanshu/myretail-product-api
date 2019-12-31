@@ -1,4 +1,4 @@
-#MyRetail REST API
+# MyRetail REST API
 
 MyRetail RESTful service provides the client application ability to:
 
@@ -6,49 +6,49 @@ MyRetail RESTful service provides the client application ability to:
 
     2. Send request to modify the price information in the database
 
-##Get Product Information:
+Get Product Information:
 -----------------------
 
-###Input: 
+### Input: 
 The client application does a GET request at the path "/products/{id}" for a product 
 
-###Internal Working: 
+### Internal Working: 
 When the API receives the request, it sends a request to "redsky.target.com" and retrieves the 
 product information. This product information doesn't contain price that is needed by the user. The price is retrieved
 from a data store. The price information is now combined with the required product information to provide only the 
 required product information to the user.
 
-###Output: 
+### Output: 
 For a product with product id '13860428', the sample JSON output is as shown below
 
 {"id":13860428,"name":"The Big Lebowski (Blu-ray) (Widescreen)","current_price":{"value": 19.28,"currency_code":"USD"}}
 
-###Errors/Validations: 
+### Errors/Validations: 
 Appropriate error messages are provided after validating the data. The client application can use the message in the response to display the same to the user appropriately.
 
 
-##Update Product Price in the datastore:
+Update Product Price in the datastore:
 -------------------------------------
 
-###Input: 
+### Input: 
 The user/client application can do a PUT request with input similar to the response received in GET and should be able
 to modify the price in the datastore. The request is done at the same path "/products/{id}"
 
-####Sample Input: 
+### Sample Input: 
 JSON Body - {"id":13860428,"name":"The Big Lebowski (Blu-ray) (Widescreen)","current_price":{"value": 15.67,"currency_code":"USD"}}
 
-###Internal Working: 
+### Internal Working: 
 When the API receives PUT request, it does request validations to see if the product is available. If it is, 
 it updates the price for the product is modified in the data store.
 
-###Output: 
+### Output: 
 Success message is returned if the price modification is done.
 
-###Errors/Validations: 
+### Errors/Validations: 
 Appropriate error messages are provided after validating the data. More information is available in 
 the below sections. The client application can use the message in the response to display the same to the user appropriately.
 
-##Technologies Used
+Technologies Used
 -----------------
 
 1. Spring Boot - https://projects.spring.io/spring-boot/
@@ -56,7 +56,7 @@ the below sections. The client application can use the message in the response t
 3. Swagger - http://swagger.io/
 4. Gradle - https://gradle.org
 
-##Instructions to Setup
+Instructions to Setup
 ---------------------
 1. Clone the code from git repository - https://github.com/sudhsi/myretail-product-api
 2. Go to myretail-product directory
@@ -66,13 +66,13 @@ the below sections. The client application can use the message in the response t
 `http://localhost:8080/swagger-ui.html`
 5. Swagger documentation explains the expected request and response for GET and PUT requests.
 
-##Testing
+Testing
 -------
 Application has been developed using TDD/BDD approach.
 For unit test JUnit has been used and for integration test cucumber for java is used.
 The test cases can be executed by running the command './gradlew test'
 
-##Swagger UI:
+Swagger UI:
 ----------
 Swagger displays the following information for an API method by default.
 
@@ -86,19 +86,19 @@ The user can modify the values in the fields provided and can do "Try it out!" a
 
 More information about the API methods and the responses is provided below.
 
-##API Requests and Responses
+API Requests and Responses
 --------------------------
-## PUT Request:
+### PUT Request:
 
 Following PUT request will store information of productID:13860428 in NOSQL database
 
-###Request:
+### Request:
 
 `curl -X PUT "http://localhost:8080/api/v1/products/13860429" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"current_price\": { \"currency_code\": \"USD\", \"value\": 75.23 }, \"id\": 13860429}" \ 
   ' 
  'http://localhost:8080/products/13860428'`
   
-###Response Body:
+### Response Body:
 
 >{
   "id": 13860429,
@@ -148,21 +148,29 @@ Following PUT request will store information of productID:13860428 in NOSQL data
         "source": "retail-product-api"
  }
  
- ##Swagger Screenshots for the RESTful API:
+ ### Swagger screenshots for the RESTful API:
  ---------------------------------------
 
- ###Default GET Request Information in Swagger UI
+ ### GET Request Information
  ---------------------------------
- ![Alt text](/Default_GetProductInfo.png?raw=true "Default GET Information")
+ ![Alt text](/src/test/resources/executions/swagger_home.png?raw=true "Swagger Home")
 
- ###Sample GET Response  in Swagger UI
+ Response for Valid GET Request
  --------------------------------------------
- ![Alt text](/Sample_GET_Success.png?raw=true "Sample GET Response")
+ ![Alt text](/src/test/resources/executions/valid_get_response.png?raw=true "Valid GET Response")
 
- ###Default PUT Request Information in Swagger UI
+ Response for In-Valid GET Request
  ---------------------------------------------
- ![Alt text](/Default_PutRequest.png?raw=true "Default POST Information")
+ ![Alt text](/src/test/resources/executions/invalid_get_response.png?raw=true "In-Valid GET Response")
 
- ###Sample PUT Response in Swagger UI
+ PUT Request Information
  ---------------------------------
- ![Alt text](/Sample_PUT_Success.png?raw=true "Sample POST Response")
+ ![Alt text](/src/test/resources/executions/put_request.png?raw=true "PUT Request") 
+ 
+ Response for Valid PUT Request
+ ---------------------------------
+ ![Alt text](/src/test/resources/executions/valid_put_response.png?raw=true "Valid PUT Response") 
+ 
+ Response for In-Valid PUT Request
+ ---------------------------------
+ ![Alt text](/src/test/resources/executions/invalid_put_response.png?raw=true "In-Valid PUT Request")

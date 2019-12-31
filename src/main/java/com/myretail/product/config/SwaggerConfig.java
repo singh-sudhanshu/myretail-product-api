@@ -16,7 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebFlux;
 public class SwaggerConfig {
 
     @Bean
-    public Docket api(){
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.myretail.product.controller"))
@@ -28,7 +28,8 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("My Retail Product Api")
-                .description("Rest Api to retrieve product and it's current price")
+                .description("My Retail Rest Api to retrieve product and it's current price. It exposes Get and Put endpoints. Get operation is used to retrieve the product name and it's current price.\n" +
+                        "Put operation can be used to update the current price of the product. Updates are real time operations.")
                 .version("1.0.0")
                 .build();
     }

@@ -8,6 +8,7 @@ import com.myretail.product.util.Validator;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -37,7 +38,7 @@ public class ProductController {
             @ApiResponse(code = 500, message = "Internal Server Error. Unable to serve request at this time. Please try again later.")
 
     })
-    @GetMapping(value = "/products/{id}")
+    @GetMapping(value = "/products/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Mono<ProductResponse> getProduct(@PathVariable Long id) {
         return productService.service(id);
     }

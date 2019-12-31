@@ -43,7 +43,9 @@ public class ProductService {
     }
 
     public Mono<ProductUpdateResponse> updatePrice(Price price, Long id) {
-        Mono<Product> updatedProduct = mongoAdaptor.updatePrice(price, id);
+
+        Product product = Product.builder().id(id).currentPrice(price).build();
+        Mono<Product> updatedProduct = mongoAdaptor.updatePrice(product, id);
 
         return updatedProduct.map(p -> ProductUpdateResponse.builder()
                 .id(p.getId())
