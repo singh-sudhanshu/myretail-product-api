@@ -151,18 +151,26 @@ Following PUT request will store information of productID:13860428 in NOSQL data
  ### Swagger screenshots for the RESTful API:
  ---------------------------------------
 
- ### GET Request Information in Swagger UI
+ ### GET Request Information
  ---------------------------------
  ![Alt text](/src/test/resources/executions/swagger_home.png?raw=true "Swagger Home")
 
- Sample GET Response  in Swagger UI
+ Response for Valid GET Request
  --------------------------------------------
- ![Alt text](/Sample_GET_Success.png?raw=true "Sample GET Response")
+ ![Alt text](/src/test/resources/executions/valid_get_response.png?raw=true "Valid GET Response")
 
- PUT Request Information in Swagger UI
+ Response for In-Valid GET Request
  ---------------------------------------------
- ![Alt text](/Default_PutRequest.png?raw=true "Default POST Information")
+ ![Alt text](/src/test/resources/executions/invalid_get_response.png?raw=true "In-Valid GET Response")
 
- Sample PUT Response in Swagger UI
+ PUT Request Information
  ---------------------------------
- ![Alt text](/Sample_PUT_Success.png?raw=true "Sample POST Response")
+ ![Alt text](/src/test/resources/executions/put_request.png?raw=true "PUT Request") 
+ 
+ Response for Valid PUT Request
+ ---------------------------------
+ ![Alt text](/src/test/resources/executions/valid_put_response.png?raw=true "Valid PUT Response") 
+ 
+ Response for In-Valid PUT Request
+ ---------------------------------
+ ![Alt text](/src/test/resources/executions/invalid_put_response.png?raw=true "In-Valid PUT Request")
