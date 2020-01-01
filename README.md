@@ -44,6 +44,16 @@ it updates the price for the product is modified in the data store.
 ### Output: 
 Success message is returned if the price modification is done.
 
+### Supported currency codes are
+- USD
+- CSD
+- EUR
+- NZD
+- AUD
+- INR
+- JPY
+- GBP
+
 ### Errors/Validations: 
 Appropriate error messages are provided after validating the data. More information is available in 
 the below sections. The client application can use the message in the response to display the same to the user appropriately.
@@ -178,3 +188,16 @@ Following PUT request will store information of productID:13860428 in NOSQL data
   JUnit Tests result
   ---------------------------------
   ![Alt text](/src/test/resources/executions/JUnit_test_results.png?raw=true "JUnit Tests")
+  
+ 
+  Integration cucumber Tests result - Get product Name
+  ---------------------------------
+  ![Alt text](/src/test/resources/executions/GetProductName.png?raw=true "Integration Tests")
+  
+    
+ 
+  Integration cucumber Tests result - Update product price
+  ---------------------------------
+  ![Alt text](/src/test/resources/executions/UpdateProductPrice.png?raw=true "Integration Tests")
+  
+  
