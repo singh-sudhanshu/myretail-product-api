@@ -7,3 +7,24 @@ spring:
 
 redsky:
   uri: https://redsky.target.com
+
+valid:
+  currencyCodes:
+    - USD
+    - CSD
+    - EUR
+    - NZD
+    - AUD
+    - INR
+    - JPY
+    - GBP
+
+
+
+
+
+
+
+
+
+

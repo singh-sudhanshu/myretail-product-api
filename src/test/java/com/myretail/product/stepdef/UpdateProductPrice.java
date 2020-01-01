@@ -71,4 +71,36 @@ public class UpdateProductPrice {
         assertEquals(200, expectedResponse.block().getReturnDetails().getCode().intValue());
 
     }
+
+    @Given("Product id and invalid current code of the product")
+    public void product_id_and_invalid_current_code_of_the_product() {
+        id = 13860428L;
+        request = new ProductRequest(id, Price.builder().value(56.64).currencyCode("any").build());
+    }
+
+    @When("user tries to update the price of the product")
+    public void user_tries_to_update_the_price_of_the_product() {
+        applicationContext = new SpringApplicationBuilder().sources(Application.class)
+                .web(WebApplicationType.REACTIVE)
+                .run("--server.port=0");
+
+        port = applicationContext.getEnvironment().getProperty("local.server.port", Integer.class, 0);
+
+        client = WebTestClient.bindToServer().baseUrl("http://localhost:" + port).build();
+
+        result = client.put()
+                .uri("/api/v1/products/" + id)
+                .bodyValue(request)
+                .exchange()
+                .expectStatus()
+                .is4xxClientError()
+                .expectBody().returnResult();
+
+    }
+
+    @Then("application should not allow user to update the price")
+    public void application_should_not_allow_user_to_update_the_price() {
+
+        assertTrue(result.getStatus().is4xxClientError());
+    }
 }
