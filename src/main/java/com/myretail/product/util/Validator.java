@@ -18,7 +18,7 @@ public class Validator {
         if (request == null || id == null || !request.getId().equals(id))
             throw new IllegalArgumentException("Id in request and payload does not match");
 
-        if (!codeConfig.getCurrencyCodes().contains(request.getCurrentPrice().getCurrencyCode()))
+        if (!codeConfig.getCurrencyCodes().contains(request.getCurrentPrice().getCurrencyCode().trim().toUpperCase()))
             throw new IllegalArgumentException("Provided currency code is not valid");
 
         if (request.getCurrentPrice().getValue() <= 0)
